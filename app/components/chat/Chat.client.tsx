@@ -400,19 +400,29 @@ export const ChatImpl = memo(
          */
         workbenchStore.resetAllFileModifications();
       } else {
-        append({
-          role: 'user',
-          content: [
-            {
-              type: 'text',
-              text: `[Model: ${model}]\n\n[Provider: ${provider.name}]\n\n${_input}`,
-            },
-            ...imageDataList.map((imageData) => ({
-              type: 'image',
-              image: imageData,
-            })),
-          ] as any, // Type assertion to bypass compiler check
-        });
+        setMessages([
+          ...messages.map((message) => {
+            if (message.role === 'assistant' && message.content.includes('\n- ')) {
+              message.content = message.content.split('\n')[0];
+            }
+
+            return message;
+          }),
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'text',
+                text: `[Model: ${model}]\n\n[Provider: ${provider.name}]\n\n${_input}`,
+              },
+              ...imageDataList.map((imageData) => ({
+                type: 'image',
+                image: imageData,
+              })),
+            ] as any, // Type assertion to bypass compiler check
+          } as Message,
+        ]);
+        reload();
       }
 
       setInput('');
