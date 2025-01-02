@@ -171,6 +171,10 @@ export async function streamText(props: {
     } else if (message.role == 'assistant') {
       let content = message.content;
 
+      if (content.includes('\n- ')) {
+        content = content.split('\n')[0];
+      }
+
       if (contextOptimization) {
         content = simplifyBoltActions(content);
       }
