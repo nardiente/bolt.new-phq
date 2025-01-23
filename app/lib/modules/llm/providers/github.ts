@@ -13,7 +13,6 @@ export default class GithubProvider extends BaseProvider {
   };
 
   // find more in https://github.com/marketplace?type=models
-
   staticModels: ModelInfo[] = [
     { name: 'gpt-4o', label: 'GPT-4o', provider: 'Github', maxTokenAllowed: 8000 },
     { name: 'o1', label: 'o1-preview', provider: 'Github', maxTokenAllowed: 100000 },

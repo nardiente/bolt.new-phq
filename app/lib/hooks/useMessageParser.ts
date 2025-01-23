@@ -56,10 +56,6 @@ export function useMessageParser() {
 
     for (const [index, message] of messages.entries()) {
       if (message.role === 'assistant') {
-        if (message.content.includes('set up these files')) {
-          message.content = message.content.split('.')[0] + '.';
-        }
-
         const newParsedContent = messageParser.parse(message.id, message.content);
 
         setParsedMessages((prevParsed) => ({
