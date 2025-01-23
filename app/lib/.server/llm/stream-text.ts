@@ -7,9 +7,8 @@ import { PromptLibrary } from '~/lib/common/prompt-library';
 import { allowedHTMLElements } from '~/utils/markdown';
 import { LLMManager } from '~/lib/modules/llm/manager';
 import { createScopedLogger } from '~/utils/logger';
+import { createFilesContext, extractPropertiesFromMessage, simplifyBoltActions } from './utils';
 import { getFilePaths } from './select-context';
-import { createFilesContext, simplifyBoltActions } from './utils';
-import { extractPropertiesFromMessage } from './utils';
 
 export type Messages = Message[];
 
